@@ -1265,6 +1265,15 @@ left: 0px;
 	background-position: bottom;
 }
 
+.colorpicker+.iris-picker {
+	position: absolute;
+	z-index: 1;
+}
+
+.colorpicker:not(:focus)+.iris-picker {
+	display: none;
+}
+
 .navigationTabs { height: 23px; line-height: 23px; border-bottom: 1px solid #ccc; }
 .navigationTabs li { float: left; height: 23px; line-height: 23px; padding-right: 3px; }
 .navigationTabs li a{ float: left; display: block; height: 23px; line-height: 23px; padding: 0 10px; overflow: hidden;	color: #52697E;	background-color: #eee;	position: relative;	text-decoration: none; }

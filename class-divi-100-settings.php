@@ -27,8 +27,7 @@ if ( ! class_exists( 'Divi_100_Settings' ) ) {
 			$submenu_priority = $this->has_most_updated_setup ? 5 : 10;
 
 			// Register settings page and add admin scripts
-			add_action( 'admin_menu',            array( $this, 'add_menu' ), 30 ); // Make sure the priority is higher than Divi 100's add_menu()
-			add_action( 'divi_100_submenu',      array( $this, 'add_submenu' ), $submenu_priority );
+			add_action( 'admin_menu',      array( $this, 'add_submenu' ), 30 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		}
 
@@ -157,27 +156,13 @@ if ( ! class_exists( 'Divi_100_Settings' ) ) {
 		}
 
 		/**
-		 * Add menu
-		 * @return void
-		 */
-		function add_menu() {
-			if ( $this->has_most_updated_setup ) {
-				add_menu_page( 'Divi 100', 'Divi 100', 'switch_themes', 'et_divi_100_options', array( $this, 'render_settings' ) );
-
-				add_action( 'admin_head', array( $this, 'add_main_menu_scripts_styles' ), 20 ); // Make sure the priority is higher than Divi's add_menu()
-
-				do_action( 'divi_100_submenu' );
-			}
-		}
-
-		/**
 		 * Add submenu
 		 * @return void
 		 */
 		function add_submenu() {
 			if ( $this->has_most_updated_setup ) {
 				add_submenu_page(
-					'et_divi_100_options',
+					'et_divi_options',
 					esc_html( $this->settings['title'] ),
 					esc_html( $this->settings['title'] ),
 					'switch_themes',
@@ -186,7 +171,7 @@ if ( ! class_exists( 'Divi_100_Settings' ) ) {
 				);
 			} else {
 				add_submenu_page(
-					'et_divi_100_options',
+					'et_divi_options',
 					esc_html( $this->settings['title'] ),
 					esc_html( $this->settings['title'] ),
 					'switch_themes',
@@ -307,10 +292,6 @@ if ( ! class_exists( 'Divi_100_Settings' ) ) {
 						<button class="save-button" id="epanel-save-top">Save Changes</button>
 					</div>
 
-					<?php // if ( $this->settings['description'] ) { ?>
-						<?php // echo wpautop( $this->settings['description'] ); ?>
-					<?php // } ?>
-
 					<form action="" method="POST">
 						<div id="epanel-wrapper">
 							<div id="epanel">
@@ -322,12 +303,7 @@ if ( ! class_exists( 'Divi_100_Settings' ) ) {
 											<?php } ?>
 										</div><!-- #wrap-general.content-div -->
 										<div id="wrap-general" class="content-div">
-											<ul class="idTabs">
-												<li class="ui-tabs-active">
-													<a href="#general-1"><?php _e( 'General' ); ?></a>
-												</li>
-											</ul><!-- .idTabs -->
-											<div id="general-1" class="tab-content">
+											<div class="tab-content">
 												<?php
 													if ( ! empty( $this->settings['fields'] ) ) {
 														// Loop fields

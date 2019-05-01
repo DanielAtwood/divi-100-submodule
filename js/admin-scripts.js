@@ -189,4 +189,12 @@ jQuery(document).ready(function ($) {
 			}
 		}, 600 );
 	}
+
+	document.querySelectorAll('.iris-picker').forEach(el => {
+		el.addEventListener('mousedown', () => {
+			el.previousSibling.focus({preventScroll: true})
+		})
+	})
+
+	document.querySelectorAll('.iris-square-value').forEach(el => el.addEventListener('click', e => e.preventDefault()))
 });
